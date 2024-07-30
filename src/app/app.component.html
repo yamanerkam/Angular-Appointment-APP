@@ -14,7 +14,7 @@ I could also delete then noAppoinments and noAppoinments template
 
 
   <ng-template #showAppoinments>
-    <p-table [value]="appointments" [tableStyle]="{ 'min-width': '50rem' }" class="items">
+    <p-table [value]="appointments" [tableStyle]="{ 'max-width': '30rem' }" class="items">
       <ng-template pTemplate="header">
         <tr>
           <th>Customer Name</th>
@@ -56,5 +56,7 @@ I could also delete then noAppoinments and noAppoinments template
   <p-button (onClick)="handleClick()" label="New Appointment">
 
   </p-button>
+
+
 
 </div>
