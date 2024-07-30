@@ -17,21 +17,37 @@ import { CalendarModule } from 'primeng/calendar';
   styleUrl: './appointment-list.component.css'
 })
 export class AppointmentListComponent {
-  appointments: Appointment[] = [
-    new Appointment("Erkam Yaman", new Date(), "Hair"),
-    new Appointment("Erkam Yaman", new Date(), "Nail"),
-    new Appointment("Erkam Yaman", new Date(), "Shave")
-  ]
+  appointments: Appointment[] = []
 
 
 
-  dateTime: Date;
 
   constructor(private _router: Router) {
-    this.dateTime = new Date();
+    const [appointmentDate, appointmentTime] = this.dateCreator();
+    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Hair"));
+    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Nail"));
+    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Beard"));
   }
+
   // try to make this function usable everywhere
   navigate(path: string) {
     this._router.navigate([path])
   }
+
+  dateCreator(): string[] {
+    const date: Date = new Date()
+
+    const year: string = date.getFullYear().toString();
+    const month: string = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day: string = date.getDate().toString().padStart(2, '0');
+
+    const finalDate: string = `${day}/${month}/${year}`
+
+    const hour = date.getHours().toString().padStart(2, '0')
+    const minute = date.getMinutes().toString().padStart(2, '0')
+    const finalTime = `${hour}:${minute}`
+    return [finalDate, finalTime]
+  }
+
+
 }
