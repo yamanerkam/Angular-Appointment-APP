@@ -1,6 +1,24 @@
 <div class="container">
 
 
+  <!-- Such a great way! it has a smilar logic to React Conditional Rendering-->
+  <div *ngIf="appointments.length==0; then noAppoinments else showAppoinments"> </div>
+  <ng-template #noAppoinments>
+    There are no appoinments to display!
+  </ng-template>
+
+  <ng-template #showAppoinments>
+    <ul class="items">
+      <li *ngFor="let appointment of appointments">
+        {{appointment.customerName}}
+        -
+        {{appointment.appointmentTitle}}
+        -
+        {{appointment.appointmentDate}}
+      </li>
+    </ul>
+  </ng-template>
+
 
   <!-- 
   this looks quite spagetti-code-ish dont like it
