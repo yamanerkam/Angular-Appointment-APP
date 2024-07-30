@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { FirestoreModule } from '@angular/fire/firestore';
+
+import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, orderBy, query, updateDoc } from '@angular/fire/firestore';
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
