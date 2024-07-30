@@ -1,14 +1,21 @@
 <p-card>
 
-    <p-floatLabel>
-        <input pInputText id="customername" />
-        <label for="customername">Customer Name</label>
-    </p-floatLabel>
+    <form action="">
+        <div>
+            <label for="customername">Customer Name</label>
+            <input name="customername" type="text" [(ngModel)]="customername" />
+        </div>
 
-    <p-floatLabel>
-        <input pInputText id="title" />
-        <label for="title">Title</label>
-    </p-floatLabel>
+        <div>
+            <label for="title">Title</label>
+            <input name="title" type="text" [(ngModel)]="title" />
+        </div>
+        <button type="submit" (click)="handleForm($event)">xxx</button>
+
+
+    </form>
+
+
 
 
 
