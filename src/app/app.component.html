@@ -1,16 +1,27 @@
 <div class="container">
-  <p-button label="primeNG Button"></p-button>
-  <div class="items" *ngFor="let appointment of appointments">
-    <ul>
-      <li>
-        {{appointment.customerName}}
-        -
-        {{appointment.appointmentTitle}}
-        -
-        {{appointment.appointmentDate}}
-      </li>
 
-    </ul>
 
+
+  <!-- 
+  this looks quite spagetti-code-ish dont like it
+   find a better way.
+  -->
+  <!-- 
+  <div *ngIf='appointments.length==0'>
+    There are no appoinments to display!
   </div>
+  <ul class="items" *ngIf="appointments.length>0">
+    <li *ngFor="let appointment of appointments">
+      {{appointment.customerName}}
+      -
+      {{appointment.appointmentTitle}}
+      -
+      {{appointment.appointmentDate}}
+    </li>
+  </ul>
+
+  -->
+
+  <p-button label="New Appointment"></p-button>
+
 </div>

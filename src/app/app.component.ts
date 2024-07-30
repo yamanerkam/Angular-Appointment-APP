@@ -15,8 +15,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'Angular-Appointment-Application';
-  appointments = [
+  appointments: Appointment[] = [
     new Appointment("Erkam Yaman", new Date(), "Hair"),
     new Appointment("Erkam Yaman", new Date(), "Nail"),
-    new Appointment("Erkam Yaman", new Date(), "Shave")]
+    new Appointment("Erkam Yaman", new Date(), "Shave")
+  ]
 }
