@@ -3,20 +3,33 @@
 
   <!-- Such a great way! it has a smilar logic to React Conditional Rendering-->
   <div *ngIf="appointments.length==0; then noAppoinments else showAppoinments"> </div>
+
   <ng-template #noAppoinments>
     There are no appoinments to display!
   </ng-template>
 
+  <!--
+I could also delete then noAppoinments and noAppoinments template
+-->
+
+
   <ng-template #showAppoinments>
-    <ul class="items">
-      <li *ngFor="let appointment of appointments">
-        {{appointment.customerName}}
-        -
-        {{appointment.appointmentTitle}}
-        -
-        {{appointment.appointmentDate}}
-      </li>
-    </ul>
+    <p-table [value]="appointments" [tableStyle]="{ 'min-width': '50rem' }" class="items">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Customer Name</th>
+          <th>Title</th>
+          <th>Date</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-appointment>
+        <tr>
+          <td>{{ appointment.customerName }}</td>
+          <td>{{ appointment.appointmentTitle }}</td>
+          <td>{{ appointment.appointmentDate }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
   </ng-template>
 
 
@@ -40,6 +53,8 @@
 
   -->
 
-  <p-button label="New Appointment"></p-button>
+  <p-button (onClick)="handleClick()" label="New Appointment">
+
+  </p-button>
 
 </div>
