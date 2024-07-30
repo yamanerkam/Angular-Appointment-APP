@@ -6,7 +6,7 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { CalendarModule } from 'primeng/calendar';
 @Component({
@@ -22,13 +22,16 @@ export class AppointmentListComponent {
     new Appointment("Erkam Yaman", new Date(), "Nail"),
     new Appointment("Erkam Yaman", new Date(), "Shave")
   ]
-  handleClick() {
-    console.log('clicked')
-  }
+
+
 
   dateTime: Date;
 
-  constructor() {
+  constructor(private _router: Router) {
     this.dateTime = new Date();
+  }
+  // try to make this function usable everywhere
+  navigate(path: string) {
+    this._router.navigate([path])
   }
 }

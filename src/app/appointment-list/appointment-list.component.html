@@ -53,14 +53,19 @@
   
     -->
 
-    <p-button (onClick)="handleClick()" label="New Appointment">
+    <!--
+    I could simply use that but I would like the functional approach better
+    <p-button routerLink="/new" label="New Appointment">
+
+    </p-button>
+    -->
+
+    <p-button (onClick)="navigate('/new')" label="New Appointment">
 
     </p-button>
 
 
-    <ul>
-        <li><a routerLink="/new" routerLinkActive="active" ariaCurrentWhenActive="page">First Component</a></li>
-    </ul>
-    <router-outlet></router-outlet>
+
+
 
 </div>
