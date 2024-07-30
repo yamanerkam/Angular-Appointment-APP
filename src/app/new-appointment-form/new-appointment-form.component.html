@@ -1,16 +1,21 @@
 <p-card>
 
     <form action="">
+
         <div>
             <label for="customername">Customer Name</label>
-            <input name="customername" type="text" [(ngModel)]="customername" />
+            <input pInputText name="customername" type="text" [(ngModel)]="customername" />
         </div>
 
         <div>
             <label for="title">Title</label>
-            <input name="title" type="text" [(ngModel)]="title" />
+            <input pInputText name="title" type="text" [(ngModel)]="title" />
         </div>
-        <button type="submit" (click)="handleForm($event)">xxx</button>
+
+        <p-calendar name="date" [(ngModel)]="date" />
+        <p-calendar timeOnly name="date" [(ngModel)]="time" />
+
+        <button pButton type="submit" (click)="handleForm($event)">xxx</button>
 
 
     </form>
