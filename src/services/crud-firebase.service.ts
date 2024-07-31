@@ -7,9 +7,53 @@ import { DocumentData, DocumentReference, Firestore, addDoc, collection, collect
   providedIn: 'root'
 })
 export class CrudFirebaseService {
-  constructor() { }
+  constructor(public firestore: Firestore) { }
 
   sayHello() {
     console.log('Hello from MyService!');
   }
+  // crud operations
+
+  async addAppointment(customername: string, title: string, date: string, time: string) {
+
+    try {
+      const docRef = await addDoc(collection(this.firestore, 'appo'), {
+        customername: customername,
+        title: title,
+        date: date,
+        time: time,
+        createdAt: new Date(),
+      });
+
+      console.log("Document written with ID: ", docRef.id);
+      await updateDoc(docRef, {
+        _id: docRef.id
+      });
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
+
+
+
+  getAllAppointments() {
+
+  }
+
+  updateAppointment() {
+
+  }
+
+  deleteAppointment() {
+
+  }
+
+
+
+
+
+
 }
