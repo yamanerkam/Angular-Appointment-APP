@@ -4,10 +4,11 @@
 
         <div>
             <label for="customername">Customer Name</label>
-            <input pInputText name="customername" type="text" (ngModelChange)="changeDetect($event)"
-                [(ngModel)]="customername" />
+            <input pInputText name="customername" type="text" [(ngModel)]="customername" />
         </div>
-
+        <!--
+       it is like onChange (ngModelChange)="changeDetect($event)"
+  -->
         <div>
             <label for="title">Title</label>
             <input pInputText name="title" type="text" [(ngModel)]="title" />

@@ -36,8 +36,9 @@ export class NewAppointmentFormComponent {
     this.customername = '';
     this.title = ''
   }
-
-  changeDetect(event: any) {
-    console.log(event)
-  }
+  /*
+    changeDetect(event: any) {
+      console.log(event)
+    }
+      */
 }
