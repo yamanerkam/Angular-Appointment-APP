@@ -4,7 +4,8 @@
 
         <div>
             <label for="customername">Customer Name</label>
-            <input pInputText name="customername" type="text" [(ngModel)]="customername" />
+            <input pInputText name="customername" type="text" (ngModelChange)="changeDetect($event)"
+                [(ngModel)]="customername" />
         </div>
 
         <div>
