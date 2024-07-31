@@ -7,7 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
+import { ToolsService } from '../../services/tools.service';
 import { CalendarModule } from 'primeng/calendar';
 @Component({
   selector: 'app-appointment-list',
@@ -22,7 +22,7 @@ export class AppointmentListComponent {
 
 
 
-  constructor(private _router: Router) {
+  constructor(private _tools: ToolsService) {
     const [appointmentDate, appointmentTime] = this.dateCreator();
     this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Hair"));
     this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Nail"));
@@ -30,8 +30,15 @@ export class AppointmentListComponent {
   }
 
   // try to make this function usable everywhere
+  /* navigate(path: string) {
+     this._router.navigate([path])
+   } */
+
+  // i managed to do it. now i have a function that works from a service
+  // this function is now injectiable to anywhere
+
   navigate(path: string) {
-    this._router.navigate([path])
+    this._tools.navigate(path)
   }
 
   dateCreator(): string[] {
