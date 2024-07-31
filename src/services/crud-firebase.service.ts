@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, getDocs, orderBy, query, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { ToolsService } from './tools.service';
+
 // it helps us to to inject the services and  
 // provideIn  tells us where the service is accessible in the application
 // it is root cus to make the service globally available.
@@ -8,11 +10,14 @@ import { DocumentData, DocumentReference, Firestore, addDoc, collection, collect
 })
 export class CrudFirebaseService {
   errorMessage = ''
-  constructor(public firestore: Firestore) { }
+  constructor(public firestore: Firestore, public tools: ToolsService) { }
 
   sayHello() {
     console.log('Hello from MyService!');
   }
+
+
+
   // crud operations
 
   async addAppointment(customername: string, title: string, date: string, time: string) {
@@ -35,7 +40,7 @@ export class CrudFirebaseService {
       await updateDoc(docRef, {
         _id: docRef.id
       });
-
+      this.tools.navigate('/')
     } catch (err: any) {
       console.log(err.message)
       // add here errorMessageUpdate

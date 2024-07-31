@@ -39,7 +39,7 @@ export class NewAppointmentFormComponent {
 
   async handleForm(event: any) {
 
-    this.crud.deleteAppointment('6MM8o9t2FJxOZHfGXrDF')
+    // this.crud.deleteAppointment('6MM8o9t2FJxOZHfGXrDF')
     event.preventDefault()
     console.log(this.customername, this.title, this.date, this.time)
     this.crud.addAppointment(this.customername, this.title, this.date, this.time)
