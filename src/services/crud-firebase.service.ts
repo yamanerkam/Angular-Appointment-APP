@@ -7,6 +7,7 @@ import { DocumentData, DocumentReference, Firestore, addDoc, collection, collect
   providedIn: 'root'
 })
 export class CrudFirebaseService {
+  errorMessage = ''
   constructor(public firestore: Firestore) { }
 
   sayHello() {
@@ -15,8 +16,12 @@ export class CrudFirebaseService {
   // crud operations
 
   async addAppointment(customername: string, title: string, date: string, time: string) {
-
+    if (!customername || !title || !date || !time) {
+      this.errorMessage = 'Please fill all the fields!'
+      return
+    }
     try {
+
       const docRef = await addDoc(collection(this.firestore, 'appo'), {
         customername: customername,
         title: title,
@@ -26,6 +31,7 @@ export class CrudFirebaseService {
       });
 
       console.log("Document written with ID: ", docRef.id);
+
       await updateDoc(docRef, {
         _id: docRef.id
       });

@@ -33,10 +33,13 @@ export class NewAppointmentFormComponent {
   title = '';
   date = '';
   time = '';
+  errorMessage = ''
+
   handleForm(event: any) {
     event.preventDefault()
     console.log(this.customername, this.title, this.date, this.time)
     this.crud.addAppointment(this.customername, this.title, this.date, this.time)
+    this.errorMessage = this.crud.errorMessage;
     this.customername = '';
     this.title = ''
     this.date = ''

@@ -18,7 +18,9 @@
         <p-calendar timeOnly name="date" [(ngModel)]="time" />
 
         <button pButton type="submit" (click)="handleForm($event)">xxx</button>
-
+        <p *ngIf="errorMessage">
+            {{errorMessage}}
+        </p>
 
     </form>
 
