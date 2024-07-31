@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, orderBy, query, updateDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, getDocs, orderBy, query, updateDoc } from '@angular/fire/firestore';
 // it helps us to to inject the services and  
 // provideIn  tells us where the service is accessible in the application
 // it is root cus to make the service globally available.
@@ -16,12 +16,12 @@ export class CrudFirebaseService {
   // crud operations
 
   async addAppointment(customername: string, title: string, date: string, time: string) {
+    this.errorMessage = ''
     if (!customername || !title || !date || !time) {
       this.errorMessage = 'Please fill all the fields!'
       return
     }
     try {
-
       const docRef = await addDoc(collection(this.firestore, 'appo'), {
         customername: customername,
         title: title,
@@ -36,18 +36,19 @@ export class CrudFirebaseService {
         _id: docRef.id
       });
 
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      console.log(err.message)
+      // add here errorMessageUpdate
     }
+  }
 
+  async getAllAppointments() {
+    return (
+      await getDocs(query(collection(this.firestore, 'appo')))).docs.map((appos) => appos.data())
   }
 
 
 
-
-  getAllAppointments() {
-
-  }
 
   updateAppointment() {
 

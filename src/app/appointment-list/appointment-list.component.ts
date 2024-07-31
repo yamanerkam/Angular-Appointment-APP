@@ -9,6 +9,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ToolsService } from '../../services/tools.service';
 import { CalendarModule } from 'primeng/calendar';
+import { CrudFirebaseService } from '../../services/crud-firebase.service';
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
@@ -17,17 +18,20 @@ import { CalendarModule } from 'primeng/calendar';
   styleUrl: './appointment-list.component.css'
 })
 export class AppointmentListComponent {
-  appointments: Appointment[] = []
+  appointments: any[] = [];
 
 
 
 
-  constructor(private _tools: ToolsService) {
-    const [appointmentDate, appointmentTime] = this.dateCreator();
-    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Hair"));
-    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Nail"));
-    this.appointments.push(new Appointment("Erkam Yaman", appointmentDate, appointmentTime, "Beard"));
+  constructor(private _tools: ToolsService, private crud: CrudFirebaseService) {
+    this.getData()
   }
+
+  async getData() {
+    this.appointments = await this.crud.getAllAppointments();
+    console.log(this.appointments);
+  }
+
 
   // try to make this function usable everywhere
   /* navigate(path: string) {

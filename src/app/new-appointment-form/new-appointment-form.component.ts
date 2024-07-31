@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
+import { MessagesModule } from 'primeng/messages';
 
 
 @Component({
@@ -19,13 +20,15 @@ import { CalendarModule } from 'primeng/calendar';
     CardModule,
     FormsModule,
     CalendarModule,
-    CommonModule
+    CommonModule,
+    MessagesModule
   ],
 
   templateUrl: './new-appointment-form.component.html',
   styleUrl: './new-appointment-form.component.css'
 })
 export class NewAppointmentFormComponent {
+  appointments: any[] = [];
   constructor(private crud: CrudFirebaseService) {
 
   }
@@ -35,11 +38,16 @@ export class NewAppointmentFormComponent {
   time = '';
   errorMessage = ''
 
-  handleForm(event: any) {
+  async handleForm(event: any) {
+    this.appointments = await this.crud.getAllAppointments();
+    console.log(this.appointments);
+
     event.preventDefault()
     console.log(this.customername, this.title, this.date, this.time)
     this.crud.addAppointment(this.customername, this.title, this.date, this.time)
     this.errorMessage = this.crud.errorMessage;
+    console.log(this.errorMessage, this.crud.errorMessage)
+
     this.customername = '';
     this.title = ''
     this.date = ''
