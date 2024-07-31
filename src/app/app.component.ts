@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
-
-import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, orderBy, query, updateDoc } from '@angular/fire/firestore';
 import { AppointmentListComponent } from "./appointment-list/appointment-list.component";
+import { CrudFirebaseService } from '../services/crud-firebase.service';
 
 
 @Component({
@@ -16,8 +15,10 @@ import { AppointmentListComponent } from "./appointment-list/appointment-list.co
 export class AppComponent {
   title = 'Angular-Appointment-Application';
 
-  getAllContacts() {
 
+  constructor(private crud: CrudFirebaseService) { }
+  sayHello() {
+    this.crud.sayHello()
   }
 
 }
