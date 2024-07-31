@@ -19,7 +19,7 @@ import { CrudFirebaseService } from '../../services/crud-firebase.service';
 })
 export class AppointmentListComponent {
   appointments: any[] = [];
-
+  // try to use the Appoinments class from the shared
 
 
 

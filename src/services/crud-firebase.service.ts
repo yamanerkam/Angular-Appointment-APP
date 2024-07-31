@@ -54,13 +54,20 @@ export class CrudFirebaseService {
 
   }
 
-  deleteAppointment() {
-
+  async deleteAppointment(docId: string) {
+    try {
+      const docRef = doc(this.firestore, 'appo', docId);
+      await deleteDoc(docRef);
+      console.log("Document deleted with ID: ", docId);
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
   }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+

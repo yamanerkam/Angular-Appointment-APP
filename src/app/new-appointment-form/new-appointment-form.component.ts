@@ -28,7 +28,6 @@ import { MessagesModule } from 'primeng/messages';
   styleUrl: './new-appointment-form.component.css'
 })
 export class NewAppointmentFormComponent {
-  appointments: any[] = [];
   constructor(private crud: CrudFirebaseService) {
 
   }
@@ -39,9 +38,8 @@ export class NewAppointmentFormComponent {
   errorMessage = ''
 
   async handleForm(event: any) {
-    this.appointments = await this.crud.getAllAppointments();
-    console.log(this.appointments);
 
+    this.crud.deleteAppointment('6MM8o9t2FJxOZHfGXrDF')
     event.preventDefault()
     console.log(this.customername, this.title, this.date, this.time)
     this.crud.addAppointment(this.customername, this.title, this.date, this.time)
