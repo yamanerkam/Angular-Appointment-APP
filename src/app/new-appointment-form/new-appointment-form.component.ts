@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { FloatLabelModule } from 'primeng/floatlabel';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { CrudFirebaseService } from '../../services/crud-firebase.service';
+
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 
 @Component({
@@ -39,12 +41,10 @@ export class NewAppointmentFormComponent {
 
   async handleForm(event: any) {
 
-    // this.crud.deleteAppointment('6MM8o9t2FJxOZHfGXrDF')
     event.preventDefault()
-    console.log(this.customername, this.title, this.date, this.time)
     this.crud.addAppointment(this.customername, this.title, this.date, this.time)
+
     this.errorMessage = this.crud.errorMessage;
-    console.log(this.errorMessage, this.crud.errorMessage)
 
     this.customername = '';
     this.title = ''

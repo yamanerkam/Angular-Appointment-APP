@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { Appointment } from '../../shared/models/appoinment';
-import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+import { ToolsService } from '../../services/tools.service';
+import { CrudFirebaseService } from '../../services/crud-firebase.service';
+
+import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ToolsService } from '../../services/tools.service';
 import { CalendarModule } from 'primeng/calendar';
-import { CrudFirebaseService } from '../../services/crud-firebase.service';
+
 @Component({
   selector: 'app-appointment-list',
   standalone: true,

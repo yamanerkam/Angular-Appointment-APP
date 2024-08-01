@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { AppointmentListComponent } from "./appointment-list/appointment-list.component";
+
 import { CrudFirebaseService } from '../services/crud-firebase.service';
+
+import { AppointmentListComponent } from "./appointment-list/appointment-list.component";
+
+import { ButtonModule } from 'primeng/button';
 
 
 @Component({
