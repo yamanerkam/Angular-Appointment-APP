@@ -17,12 +17,14 @@
         <div>
             <label for="date">Date</label>
             <br>
-            <p-calendar name="date" [(ngModel)]="date" />
+            <p-calendar [minDate]="minDate" name="date" [(ngModel)]="date" />
         </div>
+
         <div>
             <label for="time">Time</label>
             <br>
-            <p-calendar timeOnly name="date" [(ngModel)]="time" />
+            <!-- disabled hours should be added -->
+            <p-calendar timeOnly name="time" [(ngModel)]="time" />
         </div>
 
         <button pButton type="submit" (click)="handleForm($event)">xxx</button>

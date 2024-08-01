@@ -47,20 +47,7 @@ export class AppointmentListComponent {
     this._tools.navigate(path)
   }
 
-  dateCreator(): string[] {
-    const date: Date = new Date()
 
-    const year: string = date.getFullYear().toString();
-    const month: string = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day: string = date.getDate().toString().padStart(2, '0');
-
-    const finalDate: string = `${day}/${month}/${year}`
-
-    const hour = date.getHours().toString().padStart(2, '0')
-    const minute = date.getMinutes().toString().padStart(2, '0')
-    const finalTime = `${hour}:${minute}`
-    return [finalDate, finalTime]
-  }
 
 
 }

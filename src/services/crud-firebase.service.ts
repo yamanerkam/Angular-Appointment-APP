@@ -10,24 +10,22 @@ import { ToolsService } from './tools.service';
 })
 export class CrudFirebaseService {
   errorMessage = ''
+  collectionName = 'appointmentsNew'
   constructor(public firestore: Firestore, public tools: ToolsService) { }
 
-  sayHello() {
-    console.log('Hello from MyService!');
-  }
 
 
 
   // crud operations
 
-  async addAppointment(customername: string, title: string, date: string, time: string) {
+  async addAppointment(customername: string, title: string, date: Date, time: Date) {
     this.errorMessage = ''
     if (!customername || !title || !date || !time) {
       this.errorMessage = 'Please fill all the fields!'
       return
     }
     try {
-      const docRef = await addDoc(collection(this.firestore, 'appo'), {
+      const docRef = await addDoc(collection(this.firestore, this.collectionName), {
         customername: customername,
         title: title,
         date: date,
@@ -36,20 +34,26 @@ export class CrudFirebaseService {
       });
 
       console.log("Document written with ID: ", docRef.id);
+      const convertedDateAndTime = this.tools.dateCreator(date, time)
 
       await updateDoc(docRef, {
-        _id: docRef.id
+        _id: docRef.id,
+        date: convertedDateAndTime[0],
+        time: convertedDateAndTime[1],
       });
-      this.tools.navigate('/')
+
     } catch (err: any) {
       console.log(err.message)
-      // add here errorMessageUpdate
+      this.errorMessage = 'the appointment is not set!'
+    } finally {
+      this.tools.navigate('/')
     }
   }
 
   async getAllAppointments() {
     return (
-      await getDocs(query(collection(this.firestore, 'appo')))).docs.map((appos) => appos.data())
+      await getDocs(query(collection(this.firestore, this.collectionName)))).docs.map((appos) => appos.data()
+      )
   }
 
 

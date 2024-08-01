@@ -33,16 +33,19 @@ export class NewAppointmentFormComponent {
   constructor(private crud: CrudFirebaseService) {
 
   }
+
+  minDate = new Date()
   customername = '';
   title = '';
   date = '';
   time = '';
+
   errorMessage = ''
 
   async handleForm(event: any) {
 
     event.preventDefault()
-    this.crud.addAppointment(this.customername, this.title, this.date, this.time)
+    this.crud.addAppointment(this.customername, this.title, new Date(this.date), new Date(this.time))
 
     this.errorMessage = this.crud.errorMessage;
 

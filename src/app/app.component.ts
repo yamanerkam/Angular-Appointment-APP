@@ -20,8 +20,6 @@ export class AppComponent {
 
 
   constructor(private crud: CrudFirebaseService) { }
-  sayHello() {
-    this.crud.sayHello()
-  }
+
 
 }
