@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DocumentData, DocumentReference, Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc, getDocs, orderBy, query, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { ToolsService } from './tools.service';
+import { Observable } from 'rxjs';
+
 
 // it helps us to to inject the services and  
 // provideIn  tells us where the service is accessible in the application
@@ -10,7 +12,7 @@ import { ToolsService } from './tools.service';
 })
 export class CrudFirebaseService {
   errorMessage = ''
-  collectionName = 'appointmentsNew2'
+  collectionName = 'appointmentsNew22'
   constructor(public firestore: Firestore, public tools: ToolsService) { }
 
 
@@ -51,6 +53,30 @@ export class CrudFirebaseService {
     }
   }
 
+
+  getAllAppointments(): Observable<any[]> {
+    return new Observable((observer) => {
+
+      const querySnapshot = query(collection(this.firestore, this.collectionName));
+
+      const unsubscribe = onSnapshot(querySnapshot, (snapshot) => {
+        const updatedAppointments: any[] = [];
+        snapshot.forEach((doc) => {
+          updatedAppointments.push({ id: doc.id, ...doc.data() });
+        });
+        console.log('Current appointments: ', updatedAppointments);
+        observer.next(updatedAppointments);
+      }, (error) => {
+        observer.error(error);
+      });
+
+      return { unsubscribe };
+    });
+  }
+
+
+
+  /*
   getAllAppointments(callback: (appointments: any[]) => void) {
     const querySnapshot = query(collection(this.firestore, this.collectionName));
     onSnapshot(querySnapshot, (snapshot) => {
@@ -62,7 +88,7 @@ export class CrudFirebaseService {
       callback(updatedAppointments);
     });
   }
-
+*/
 
 
 
@@ -73,7 +99,7 @@ export class CrudFirebaseService {
 
   async deleteAppointment(docId: string) {
     try {
-      const docRef = doc(this.firestore, 'appo', docId);
+      const docRef = doc(this.firestore, this.collectionName, docId);
       await deleteDoc(docRef);
       console.log("Document deleted with ID: ", docId);
     } catch (error) {
