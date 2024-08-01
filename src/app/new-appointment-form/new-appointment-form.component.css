@@ -30,7 +30,8 @@ form p-calendar {
 }
 
 form button[pButton] {
-    padding: 0.75rem;
+    padding: 1rem 3rem;
+    width: fit-content;
     background-color: #007bff;
     color: #fff;
     border: none;
