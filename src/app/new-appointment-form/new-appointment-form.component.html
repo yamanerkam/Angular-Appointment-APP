@@ -14,8 +14,16 @@
             <input pInputText name="title" type="text" [(ngModel)]="title" />
         </div>
 
-        <p-calendar name="date" [(ngModel)]="date" />
-        <p-calendar timeOnly name="date" [(ngModel)]="time" />
+        <div>
+            <label for="date">Date</label>
+            <br>
+            <p-calendar name="date" [(ngModel)]="date" />
+        </div>
+        <div>
+            <label for="time">Time</label>
+            <br>
+            <p-calendar timeOnly name="date" [(ngModel)]="time" />
+        </div>
 
         <button pButton type="submit" (click)="handleForm($event)">xxx</button>
         <p *ngIf="errorMessage">
