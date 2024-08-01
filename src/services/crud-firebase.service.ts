@@ -10,7 +10,7 @@ import { ToolsService } from './tools.service';
 })
 export class CrudFirebaseService {
   errorMessage = ''
-  collectionName = 'appointmentsNew'
+  collectionName = 'appointmentsNew2'
   constructor(public firestore: Firestore, public tools: ToolsService) { }
 
 
@@ -24,22 +24,23 @@ export class CrudFirebaseService {
       this.errorMessage = 'Please fill all the fields!'
       return
     }
+
     try {
+
+      const convertedDateAndTime = this.tools.dateCreator(date, time)
+
       const docRef = await addDoc(collection(this.firestore, this.collectionName), {
         customername: customername,
         title: title,
-        date: date,
-        time: time,
+        date: convertedDateAndTime[0],
+        time: convertedDateAndTime[1],
         createdAt: new Date(),
       });
 
       console.log("Document written with ID: ", docRef.id);
-      const convertedDateAndTime = this.tools.dateCreator(date, time)
-
       await updateDoc(docRef, {
         _id: docRef.id,
-        date: convertedDateAndTime[0],
-        time: convertedDateAndTime[1],
+
       });
 
     } catch (err: any) {
@@ -50,11 +51,18 @@ export class CrudFirebaseService {
     }
   }
 
-  async getAllAppointments() {
-    return (
-      await getDocs(query(collection(this.firestore, this.collectionName)))).docs.map((appos) => appos.data()
-      )
+  getAllAppointments(callback: (appointments: any[]) => void) {
+    const querySnapshot = query(collection(this.firestore, this.collectionName));
+    onSnapshot(querySnapshot, (snapshot) => {
+      const updatedAppointments: any[] = [];
+      snapshot.forEach((doc) => {
+        updatedAppointments.push({ id: doc.id, ...doc.data() });
+      });
+      console.log("Current appointments: ", updatedAppointments);
+      callback(updatedAppointments);
+    });
   }
+
 
 
 

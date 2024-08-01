@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { ToolsService } from '../../services/tools.service';
 import { CrudFirebaseService } from '../../services/crud-firebase.service';
@@ -11,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CalendarModule } from 'primeng/calendar';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-list',
@@ -19,19 +21,19 @@ import { CalendarModule } from 'primeng/calendar';
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.css'
 })
+
 export class AppointmentListComponent {
   appointments: any[] = [];
-  // try to use the Appoinments class from the shared
 
 
-
-  constructor(private _tools: ToolsService, private crud: CrudFirebaseService) {
+  constructor(private _tools: ToolsService, private cd: ChangeDetectorRef, private crud: CrudFirebaseService) {
     this.getData()
   }
 
   async getData() {
-    this.appointments = await this.crud.getAllAppointments();
-    console.log(this.appointments);
+    this.crud.getAllAppointments((appointments) => {
+      this.appointments = appointments;
+    });
   }
 
 
