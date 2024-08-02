@@ -1,0 +1,56 @@
+p-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin-top: 5%;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+form input[pInputText],
+form p-calendar {
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form p {
+    color: red;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-appointment-button {
+    border: none;
+}
+
+.new-appointment-button .pi {
+    font-size: 1.5rem;
+}
+
+
+
+
+.cancel-button .pi {
+    font-size: 1.5rem;
+}

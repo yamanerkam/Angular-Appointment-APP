@@ -1,0 +1,57 @@
+<p-card>
+
+    <form action="">
+
+        <div>
+            <label for="customername">Customer Name</label>
+            <input pInputText name="customername" type="text" [(ngModel)]="customername" />
+        </div>
+        <!--
+       it is like onChange (ngModelChange)="changeDetect($event)"
+  -->
+        <div>
+            <label for="title">Title</label>
+            <input pInputText name="title" type="text" [(ngModel)]="title" />
+        </div>
+
+        <div>
+            <label for="date">Date</label>
+            <br>
+            <p-calendar [minDate]="minDate" [showIcon]="true" icon="pi pi-calendar" name="date" [(ngModel)]="date" />
+        </div>
+
+        <div>
+            <label for="time">Time</label>
+            <br>
+            <!-- disabled hours should be added -->
+            <p-calendar timeOnly name="time" [showIcon]="true" icon="pi pi-clock" [(ngModel)]="time" />
+        </div>
+
+        <div class="buttons">
+            <p-button icon="pi pi-plus" type="submit" (click)="handleForm($event)" label="New Appointment"
+                class="new-appointment-button"></p-button>
+            <p-button icon="pi pi-times" severity="danger" label="Cancel" (click)="navigate('/')"
+                class="cancel-button"></p-button>
+        </div>
+
+
+        <p *ngIf="errorMessage">
+            {{errorMessage}}
+        </p>
+
+        <!-- fix this later -->
+        <!--
+         <div *ngIf="errorMessage">
+
+            <p-messages [(value)]="errorMessage" [enableService]="false" [closable]="false" />
+        </div>
+        -->
+
+    </form>
+
+
+
+
+
+
+</p-card>

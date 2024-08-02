@@ -5,7 +5,9 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 
+import { ToolsService } from '../../../services/tools.service';
 import { CrudFirebaseService } from '../../../services/crud-firebase.service';
+
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -14,16 +16,17 @@ import { CrudFirebaseService } from '../../../services/crud-firebase.service';
   styleUrl: './list.component.css'
 })
 export class ListComponent {
-  constructor(private crud: CrudFirebaseService) {
-
+  constructor(private crud: CrudFirebaseService, private tools: ToolsService) {
   }
   @Input() appointments: any[] = [];
 
   del(id: string) {
     this.crud.deleteAppointment(id)
   }
-
-  update(id: string) {
-    this.crud.getAppointmentById(id)
+  navigate(id: string) {
+    console.log(id)
+    this.tools.navigate(`/update/${id}`);
   }
+
+
 }

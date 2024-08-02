@@ -15,9 +15,6 @@ export class CrudFirebaseService {
   collectionName = 'appointmentsNew22'
   constructor(public firestore: Firestore, public tools: ToolsService) { }
 
-
-
-
   // crud operations
 
   async addAppointment(customername: string, title: string, date: Date, time: Date) {
@@ -42,8 +39,7 @@ export class CrudFirebaseService {
       console.log("Document written with ID: ", docRef.id);
       await updateDoc(docRef, {
         _id: docRef.id,
-        date: convertedDateAndTime[0],
-        time: convertedDateAndTime[1],
+
 
       });
 
@@ -55,7 +51,6 @@ export class CrudFirebaseService {
       this.tools.navigate('/')
     }
   }
-
 
   getAllAppointments(): Observable<any[]> {
     return new Observable((observer) => {
@@ -100,26 +95,18 @@ export class CrudFirebaseService {
     }
   }
 
+  async updateAppointment(id: string, customername: string, title: string) {
+    this.errorMessage = ''
+    if (!customername || !title) {
+      this.errorMessage = 'Please fill all the fields!'
+      return
+    }
 
-
-  /*
-  getAllAppointments(callback: (appointments: any[]) => void) {
-    const querySnapshot = query(collection(this.firestore, this.collectionName));
-    onSnapshot(querySnapshot, (snapshot) => {
-      const updatedAppointments: any[] = [];
-      snapshot.forEach((doc) => {
-        updatedAppointments.push({ id: doc.id, ...doc.data() });
-      });
-      console.log("Current appointments: ", updatedAppointments);
-      callback(updatedAppointments);
+    const docRef = doc(this.firestore, this.collectionName, id);
+    await updateDoc(docRef, {
+      customername: customername,
+      title: title,
     });
-  }
-*/
-
-
-
-
-  updateAppointment() {
 
   }
 
