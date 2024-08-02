@@ -4,25 +4,7 @@
     margin: 0 auto;
 }
 
-.items {
-    width: 100%;
-    border-collapse: collapse;
-}
 
-.items th,
-.items td {
-    padding: 8px;
-    text-align: left;
-}
-
-.items th {
-    background-color: #f4f4f4;
-    border-bottom: 1px solid #ddd;
-}
-
-.items td {
-    border-bottom: 1px solid #ddd;
-}
 
 p-button {
     margin-top: 20px;
