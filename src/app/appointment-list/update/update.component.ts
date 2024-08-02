@@ -30,16 +30,18 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   styleUrl: './update.component.css'
 })
 export class UpdateComponent implements OnInit {
+  errorMessage = ''
+  constructor(private crud: CrudFirebaseService, private tools: ToolsService, private route: ActivatedRoute) { }
   appointmentId: string | null = null;
   minDate = new Date()
   customername = '';
-  title = '';
+  title = ''
   date: Date | null = null
   time: Date | null = null
-  constructor(private crud: CrudFirebaseService, private tools: ToolsService, private route: ActivatedRoute) {
 
-  }
   ngOnInit(): void {
+
+
     this.appointmentId = this.route.snapshot.paramMap.get('id');
 
     if (this.appointmentId) {
@@ -61,6 +63,8 @@ export class UpdateComponent implements OnInit {
           this.date = dateObject
           this.time = dateObject
 
+        } else {
+          this.errorMessage = this.crud.errorMessage
         }
       }).catch(error => {
         console.error('Error fetching appointment:', error);
@@ -70,7 +74,6 @@ export class UpdateComponent implements OnInit {
 
 
 
-  errorMessage = ''
 
   async handleForm(event: any) {
 

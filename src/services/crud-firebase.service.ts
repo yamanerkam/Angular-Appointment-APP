@@ -47,7 +47,6 @@ export class CrudFirebaseService {
       console.log(err.message)
       this.errorMessage = 'the appointment is not set!'
     } finally {
-
       this.tools.navigate('/')
     }
   }
@@ -73,7 +72,6 @@ export class CrudFirebaseService {
   }
 
   async getAppointmentById(id: string) {
-    this.errorMessage = '';
 
     try {
       const docRef = doc(this.firestore, this.collectionName, id);
@@ -86,11 +84,12 @@ export class CrudFirebaseService {
       } else {
         console.log("No such document!");
         this.errorMessage = 'No appointment found with this ID!';
+        console.log(this.errorMessage)
         return
       }
     } catch (err: any) {
       console.log(err.message);
-      this.errorMessage = 'Error fetching the appointment!';
+      this.errorMessage = err.message;
       return
     }
   }
