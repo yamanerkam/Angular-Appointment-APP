@@ -41,9 +41,13 @@ export class UpdateComponent implements OnInit {
   }
   ngOnInit(): void {
     this.appointmentId = this.route.snapshot.paramMap.get('id');
+
     if (this.appointmentId) {
+
       this.crud.getAppointmentById(this.appointmentId).then(appointment => {
+
         if (appointment) {
+
           this.title = appointment['title']
           this.customername = appointment['customername']
 
@@ -56,7 +60,6 @@ export class UpdateComponent implements OnInit {
 
           this.date = dateObject
           this.time = dateObject
-
 
         }
       }).catch(error => {
@@ -74,12 +77,14 @@ export class UpdateComponent implements OnInit {
     event.preventDefault()
 
     this.errorMessage = this.crud.errorMessage;
-
-    this.customername = '';
-    this.title = ''
+    this.update()
   }
   navigate(path: string) {
     this.tools.navigate(path)
   }
-
+  update() {
+    if (this.appointmentId) {
+      this.crud.updateAppointment(this.appointmentId, this.customername, this.title)
+    }
+  }
 }

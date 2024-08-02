@@ -107,6 +107,7 @@ export class CrudFirebaseService {
       customername: customername,
       title: title,
     });
+    this.tools.navigate('/')
 
   }
 
