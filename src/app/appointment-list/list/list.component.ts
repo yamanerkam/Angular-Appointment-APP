@@ -22,4 +22,8 @@ export class ListComponent {
   del(id: string) {
     this.crud.deleteAppointment(id)
   }
+
+  update(id: string) {
+    this.crud.getAppointmentById(id)
+  }
 }

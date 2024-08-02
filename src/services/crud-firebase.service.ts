@@ -52,7 +52,7 @@ export class CrudFirebaseService {
       this.errorMessage = 'the appointment is not set!'
     } finally {
 
-      //this.tools.navigate('/')
+      this.tools.navigate('/')
     }
   }
 
@@ -75,6 +75,29 @@ export class CrudFirebaseService {
 
       return { unsubscribe };
     });
+  }
+
+  async getAppointmentById(id: string) {
+    this.errorMessage = '';
+
+    try {
+      const docRef = doc(this.firestore, this.collectionName, id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const appointmentData = docSnap.data();
+        console.log("Document data:", appointmentData);
+        return appointmentData;
+      } else {
+        console.log("No such document!");
+        this.errorMessage = 'No appointment found with this ID!';
+        return
+      }
+    } catch (err: any) {
+      console.log(err.message);
+      this.errorMessage = 'Error fetching the appointment!';
+      return
+    }
   }
 
 
