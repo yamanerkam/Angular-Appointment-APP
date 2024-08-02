@@ -28,9 +28,10 @@ export class AppointmentListComponent implements OnInit, OnDestroy {
   appointments: any[] = [];
 
 
-  constructor(private _tools: ToolsService, private crud: CrudFirebaseService) {
+  constructor(private tools: ToolsService, private crud: CrudFirebaseService) {
   }
-  ngOnInit(): void {
+
+  ngOnInit() {
     this.subscription = this.crud.getAllAppointments().subscribe(
       (appointments) => {
         this.appointments = appointments;
@@ -41,11 +42,12 @@ export class AppointmentListComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }
+
 
   del(id: string) {
     this.crud.deleteAppointment(id)
@@ -62,7 +64,7 @@ export class AppointmentListComponent implements OnInit, OnDestroy {
   // this function is now injectiable to anywhere
 
   navigate(path: string) {
-    this._tools.navigate(path)
+    this.tools.navigate(path)
   }
 
 

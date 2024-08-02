@@ -17,17 +17,24 @@
         <div>
             <label for="date">Date</label>
             <br>
-            <p-calendar [minDate]="minDate" name="date" [(ngModel)]="date" />
+            <p-calendar [minDate]="minDate" [showIcon]="true" icon="pi pi-calendar" name="date" [(ngModel)]="date" />
         </div>
 
         <div>
             <label for="time">Time</label>
             <br>
             <!-- disabled hours should be added -->
-            <p-calendar timeOnly name="time" [(ngModel)]="time" />
+            <p-calendar timeOnly name="time" [showIcon]="true" icon="pi pi-clock" [(ngModel)]="time" />
         </div>
 
-        <button pButton type="submit" (click)="handleForm($event)">Add a new appointment</button>
+        <div class="buttons">
+            <p-button icon="pi pi-plus" type="submit" (click)="handleForm($event)" label="New Appointment"
+                class="new-appointment-button"></p-button>
+            <p-button icon="pi pi-times" severity="danger" label="Cancel" (click)="navigate('/')"
+                class="cancel-button"></p-button>
+        </div>
+
+
         <p *ngIf="errorMessage">
             {{errorMessage}}
         </p>

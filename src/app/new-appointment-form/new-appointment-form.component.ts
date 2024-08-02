@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { CrudFirebaseService } from '../../services/crud-firebase.service';
+import { ToolsService } from '../../services/tools.service';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -30,7 +31,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   styleUrl: './new-appointment-form.component.css'
 })
 export class NewAppointmentFormComponent {
-  constructor(private crud: CrudFirebaseService) {
+  constructor(private crud: CrudFirebaseService, private tools: ToolsService) {
 
   }
 
@@ -53,6 +54,10 @@ export class NewAppointmentFormComponent {
     this.title = ''
     this.date = ''
     this.time = ''
+  }
+
+  navigate(path: string) {
+    this.tools.navigate(path)
   }
   /*
     changeDetect(event: any) {

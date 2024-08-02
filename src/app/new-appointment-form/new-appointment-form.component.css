@@ -29,23 +29,28 @@ form p-calendar {
     font-size: 1rem;
 }
 
-form button[pButton] {
-    padding: 1rem 3rem;
-    width: fit-content;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-form button[pButton]:hover {
-    background-color: #0056b3;
-}
-
 form p {
     color: red;
     font-weight: bold;
     margin-top: 0.5rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-appointment-button {
+    border: none;
+}
+
+.new-appointment-button .pi {
+    font-size: 1.5rem;
+}
+
+
+
+
+.cancel-button .pi {
+    font-size: 1.5rem;
 }
