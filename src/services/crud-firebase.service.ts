@@ -95,17 +95,22 @@ export class CrudFirebaseService {
     }
   }
 
-  async updateAppointment(id: string, customername: string, title: string) {
+  async updateAppointment(id: string, customername: string, title: string, date: Date, time: Date) {
     this.errorMessage = ''
     if (!customername || !title) {
       this.errorMessage = 'Please fill all the fields!'
       return
     }
+    const convertedDateAndTime = this.tools.dateCreator(date, time)
+
 
     const docRef = doc(this.firestore, this.collectionName, id);
     await updateDoc(docRef, {
       customername: customername,
       title: title,
+      date: convertedDateAndTime[0],
+      time: convertedDateAndTime[1],
+      updatedAt: new Date()
     });
     this.tools.navigate('/')
 

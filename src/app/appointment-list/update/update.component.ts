@@ -83,8 +83,8 @@ export class UpdateComponent implements OnInit {
     this.tools.navigate(path)
   }
   update() {
-    if (this.appointmentId) {
-      this.crud.updateAppointment(this.appointmentId, this.customername, this.title)
+    if (this.appointmentId && this.date && this.time) {
+      this.crud.updateAppointment(this.appointmentId, this.customername, this.title, this.date, this.time)
     }
   }
 }
