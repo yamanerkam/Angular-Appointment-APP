@@ -22,7 +22,7 @@ export class CrudFirebaseService {
 
   async addAppointment(customername: string, title: string, date: Date, time: Date) {
     this.errorMessage = ''
-    if (!customername || !title || !date || !time) {
+    if (!customername || !title || date instanceof Date || time instanceof Date) {
       this.errorMessage = 'Please fill all the fields!'
       return
     }
@@ -42,6 +42,8 @@ export class CrudFirebaseService {
       console.log("Document written with ID: ", docRef.id);
       await updateDoc(docRef, {
         _id: docRef.id,
+        date: convertedDateAndTime[0],
+        time: convertedDateAndTime[1],
 
       });
 
@@ -49,7 +51,8 @@ export class CrudFirebaseService {
       console.log(err.message)
       this.errorMessage = 'the appointment is not set!'
     } finally {
-      this.tools.navigate('/')
+
+      //this.tools.navigate('/')
     }
   }
 
