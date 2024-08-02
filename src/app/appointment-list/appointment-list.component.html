@@ -1,51 +1,7 @@
 <div class="container">
+  <!--  [] do not forget this!   -->
+  <app-list [appointments]="appointments" />
 
-
-  <!-- Such a great way! it has a smilar logic to React Conditional Rendering-->
-  <div *ngIf="appointments.length==0; then noAppoinments else showAppoinments"> </div>
-
-  <ng-template #noAppoinments>
-    There are no appoinments to display!
-  </ng-template>
-
-  <!--
-  I could also delete then noAppoinments and noAppoinments template
-  -->
-
-
-  <ng-template #showAppoinments>
-    <p-table [value]="appointments" [tableStyle]="{ 'max-width': '30rem' }" class="items">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Customer Name</th>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Delete</th>
-          <th>Update</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-appointment>
-        <tr>
-          <td>{{ appointment.customername }}</td>
-          <td>{{ appointment.title }}</td>
-          <td>{{ appointment.date }}</td>
-          <td>{{ appointment.time }}</td>
-
-          <td>
-            <p-button icon="pi pi-trash" (click)="del(appointment._id)" severity="danger" label="Delete"></p-button>
-          </td>
-
-          <td>
-            <p-button icon="pi pi-pencil" severity="help" label="Update"></p-button>
-          </td>
-
-
-
-        </tr>
-      </ng-template>
-    </p-table>
-  </ng-template>
   <br>
   <p-button icon="pi pi-plus" (click)="navigate('/new')" label="New Appointment">
   </p-button>

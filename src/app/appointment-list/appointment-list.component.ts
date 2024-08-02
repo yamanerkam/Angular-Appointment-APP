@@ -1,23 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+
+import { ListComponent } from './list/list.component';
+
 
 import { ToolsService } from '../../services/tools.service';
 import { CrudFirebaseService } from '../../services/crud-firebase.service';
 
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import { CardModule } from 'primeng/card';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CalendarModule } from 'primeng/calendar';
+
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [RouterOutlet, RouterOutlet, RouterLink, RouterLinkActive, InputTextModule, CalendarModule, FloatLabelModule, CardModule, CommonModule, TableModule, ButtonModule],
+  imports: [RouterOutlet, RouterOutlet, RouterLink, RouterLinkActive, InputTextModule, CalendarModule, FloatLabelModule, CommonModule, ListComponent],
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.css'
 })
@@ -49,9 +50,7 @@ export class AppointmentListComponent implements OnInit, OnDestroy {
   }
 
 
-  del(id: string) {
-    this.crud.deleteAppointment(id)
-  }
+
 
 
 
