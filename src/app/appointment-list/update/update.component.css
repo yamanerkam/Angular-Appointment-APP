@@ -37,17 +37,8 @@ form p {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 10%;
 }
-
-.new-appointment-button {
-    border: none;
-}
-
-.new-appointment-button .pi {
-    font-size: 1.5rem;
-}
-
 
 
 

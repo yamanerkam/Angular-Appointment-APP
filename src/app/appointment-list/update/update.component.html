@@ -1,5 +1,5 @@
 <p-card>
-
+    <h1>Update the Appointment</h1>
     <form action="">
 
         <div>
@@ -28,8 +28,8 @@
         </div>
 
         <div class="buttons">
-            <p-button icon="pi pi-plus" type="submit" (click)="handleForm($event)" label="New Appointment"
-                class="new-appointment-button"></p-button>
+            <p-button icon="pi pi-check" severity="help" type="submit" (click)="handleForm($event)"
+                label="Update"></p-button>
             <p-button icon="pi pi-times" severity="danger" label="Cancel" (click)="navigate('/')"
                 class="cancel-button"></p-button>
         </div>
