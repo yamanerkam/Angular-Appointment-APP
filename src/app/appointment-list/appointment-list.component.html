@@ -1,20 +1,22 @@
 <div class="container">
   <h1>Appointments</h1>
   <!--  [] do not forget this!   -->
-  <app-list [appointments]="appointments" />
+  <div *ngIf="loader | async; then loading else showAppointments"></div>
 
-  <br>
-  <p-button icon="pi pi-plus" (click)="navigate('/new')" label="New Appointment">
-  </p-button>
+  <ng-template #loading>
+    <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+      animationDuration=".5s" />
+  </ng-template>
 
+  <ng-template #showAppointments>
+    <app-list [appointments]="appointments"></app-list>
+    <br>
+    <p-button icon="pi pi-plus" (click)="navigate('/new')" label="New Appointment"></p-button>
+  </ng-template>
 
 
   <!--
     I could simply use a router  but I would like the functional approach better
-    <p-button routerLink="/new" label="New Appointment">
-
-    </p-button>
-    -->
-
-
+    <p-button routerLink="/new" label="New Appointment"></p-button>
+  -->
 </div>

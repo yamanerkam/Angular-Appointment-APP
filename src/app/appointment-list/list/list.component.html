@@ -1,6 +1,9 @@
 <!-- Such a great way! it has a smilar logic to React Conditional Rendering-->
-<div *ngIf="appointments.length==0; then noAppoinments else showAppoinments"> </div>
 
+<div *ngIf="appointments.length==0; then noAppoinments else showAppoinments">
+
+
+</div>
 <ng-template #noAppoinments>
     There are no appoinments to display!
 </ng-template>
