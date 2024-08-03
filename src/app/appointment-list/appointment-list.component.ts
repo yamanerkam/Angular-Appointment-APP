@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { ListComponent } from './list/list.component';
 
-
+import { LoaderService } from '../../services/loader.service';
 import { ToolsService } from '../../services/tools.service';
 import { CrudFirebaseService } from '../../services/crud-firebase.service';
 
@@ -28,18 +28,20 @@ import { Observable, Subscription } from 'rxjs';
 export class AppointmentListComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
   appointments: any[] = [];
+  loady: BehaviorSubject<boolean>;
   loader: BehaviorSubject<boolean>;
-
-
 
   public getloader(): Observable<boolean> {
     return this.loader.asObservable();
   }
+
   public setloader(newValue: boolean): void {
     this.loader.next(newValue);
   }
-  constructor(private tools: ToolsService, private crud: CrudFirebaseService, private cdr: ChangeDetectorRef) {
+
+  constructor(private tools: ToolsService, private crud: CrudFirebaseService, private load: LoaderService) {
     this.loader = new BehaviorSubject<boolean>(true);
+    this.loady = new BehaviorSubject<boolean>(true);
   }
 
   ngOnInit() {
@@ -47,12 +49,13 @@ export class AppointmentListComponent implements OnInit, OnDestroy {
     this.subscription = this.crud.getAllAppointments().subscribe(
       (appointments) => {
         this.appointments = appointments;
-        this.setloader(false)
+        this.load.setloader(false)
+        this.loady = this.load.loader
       },
       (error) => {
         console.error('Error fetching appointments: ', error);
-        this.setloader(false)
-
+        this.load.setloader(false)
+        this.loady = this.load.loader
       }
 
 
