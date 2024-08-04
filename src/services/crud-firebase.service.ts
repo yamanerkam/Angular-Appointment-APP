@@ -18,16 +18,17 @@ export class CrudFirebaseService {
   // crud operations
 
   async addAppointment(customername: string, title: string, date: Date, time: Date) {
+    console.log('working addCrud')
     this.errorMessage = ''
-    if (!customername || !title || date instanceof Date || time instanceof Date) {
+    if (!customername || !title || date || time) {
       this.errorMessage = 'Please fill all the fields!'
+      console.log('you dumb')
       return
     }
-
     try {
+      console.log('working addCrud try')
 
       const convertedDateAndTime = this.tools.dateCreator(date, time)
-
       const docRef = await addDoc(collection(this.firestore, this.collectionName), {
         customername: customername,
         title: title,
@@ -39,8 +40,6 @@ export class CrudFirebaseService {
       console.log("Document written with ID: ", docRef.id);
       await updateDoc(docRef, {
         _id: docRef.id,
-
-
       });
 
     } catch (err: any) {
