@@ -1,64 +1,51 @@
-<div *ngIf="errorMessage==='No appointment found with this ID!'; then noForm else showTheForm">
+<div *ngIf="isError | async; then noForm else showTheForm">
 </div>
 <ng-template #noForm>
-    wrong id
+    Wrong ID
 </ng-template>
 
-
-
 <ng-template #showTheForm>
+    <div *ngIf="isDataReady | async; else loader then form ">
 
-    <p-card>
-        <h1>Update the Appointment</h1>
-        <form action="">
+    </div>
 
-            <div>
-                <label for="customername">Customer Name</label>
-                <input pInputText name="customername" type="text" [(ngModel)]="customername" />
-            </div>
-            <!--
-           it is like onChange (ngModelChange)="changeDetect($event)"
-      -->
-            <div>
-                <label for="title">Title</label>
-                <input pInputText name="title" type="text" [(ngModel)]="title" />
-            </div>
+    <ng-template #loader>
+        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"
+            animationDuration=".5s" />
+    </ng-template>
 
-            <div>
-                <label for="date">Date</label>
-                <br>
-                <p-calendar [minDate]="minDate" [showIcon]="true" icon="pi pi-calendar" name="date"
-                    [(ngModel)]="date" />
-            </div>
+    <ng-template #form>
+        <p-card>
+            <h1>Update the Appointment</h1>
+            <form (submit)="handleForm($event)">
+                <div>
+                    <label for="customername">Customer Name</label>
+                    <input pInputText name="customername" type="text" [(ngModel)]="customername" />
+                </div>
+                <div>
+                    <label for="title">Title</label>
+                    <input pInputText name="title" type="text" [(ngModel)]="title" />
+                </div>
+                <div>
+                    <label for="date">Date</label>
+                    <br />
+                    <p-calendar [minDate]="minDate" [showIcon]="true" icon="pi pi-calendar" name="date"
+                        [(ngModel)]="date"></p-calendar>
+                </div>
+                <div>
+                    <label for="time">Time</label>
+                    <br />
+                    <p-calendar timeOnly name="time" [showIcon]="true" icon="pi pi-clock"
+                        [(ngModel)]="time"></p-calendar>
+                </div>
+                <div class="buttons">
+                    <p-button icon="pi pi-check" severity="help" type="submit" label="Update"></p-button>
+                    <p-button icon="pi pi-times" severity="danger" label="Cancel" (click)="navigate('/')"></p-button>
+                </div>
+                <p *ngIf="errorMessage">{{ errorMessage }}</p>
+                <p *ngIf="(errorDate | async) !== ''">Please fill all the fields!</p>
 
-            <div>
-                <label for="time">Time</label>
-                <br>
-                <!-- disabled hours should be added -->
-                <p-calendar timeOnly name="time" [showIcon]="true" icon="pi pi-clock" [(ngModel)]="time" />
-            </div>
-
-            <div class="buttons">
-                <p-button icon="pi pi-check" severity="help" type="submit" (click)="handleForm($event)"
-                    label="Update"></p-button>
-                <p-button icon="pi pi-times" severity="danger" label="Cancel" (click)="navigate('/')"
-                    class="cancel-button"></p-button>
-            </div>
-
-
-            <p *ngIf="errorMessage">
-                {{errorMessage}}
-            </p>
-
-            <!-- fix this later -->
-            <!--
-             <div *ngIf="errorMessage">
-    
-                <p-messages [(value)]="errorMessage" [enableService]="false" [closable]="false" />
-            </div>
-            -->
-
-        </form>
-    </p-card>
-
+            </form>
+        </p-card>
+    </ng-template>
 </ng-template>

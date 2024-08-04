@@ -38,6 +38,8 @@
         <p *ngIf="errorMessage">
             {{errorMessage}}
         </p>
+        <p *ngIf="(errorDate | async) !== ''">Please fill all the fields!</p>
+
 
         <!-- fix this later -->
         <!--

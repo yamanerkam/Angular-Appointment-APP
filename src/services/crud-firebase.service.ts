@@ -20,7 +20,8 @@ export class CrudFirebaseService {
   async addAppointment(customername: string, title: string, date: Date, time: Date) {
     console.log('working addCrud')
     this.errorMessage = ''
-    if (!customername || !title || date || time) {
+    // fix the date issue
+    if (!customername || !title) {
       this.errorMessage = 'Please fill all the fields!'
       console.log('you dumb')
       return
@@ -94,10 +95,11 @@ export class CrudFirebaseService {
   }
 
   async updateAppointment(id: string, customername: string, title: string, date: Date, time: Date) {
-    this.errorMessage = ''
+    // fix the date issue
     if (!customername || !title) {
-      this.errorMessage = 'Please fill all the fields!'
-      return
+      this.errorMessage = 'Please fill all the fields!';
+      console.log(this.errorMessage)
+      return;
     }
     const convertedDateAndTime = this.tools.dateCreator(date, time)
 

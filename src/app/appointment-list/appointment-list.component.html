@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Appointments</h1>
   <!--  [] do not forget this!   -->
-  <div *ngIf="loady | async; then loading else showAppointments"></div>
+  <div *ngIf="loader | async; then loading else showAppointments"></div>
 
   <ng-template #loading>
     <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)"

@@ -16,7 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { CalendarModule } from 'primeng/calendar';
 
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-appointment-list',
@@ -27,44 +27,31 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AppointmentListComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription;
+
   appointments: any[] = [];
-  loady: BehaviorSubject<boolean>;
-  loader: BehaviorSubject<boolean>;
 
-  public getloader(): Observable<boolean> {
-    return this.loader.asObservable();
-  }
+  loader = new BehaviorSubject<boolean>(true);
 
-  public setloader(newValue: boolean): void {
-    this.loader.next(newValue);
-  }
 
-  constructor(private tools: ToolsService, private crud: CrudFirebaseService, private load: LoaderService) {
-    this.loader = new BehaviorSubject<boolean>(true);
-    this.loady = new BehaviorSubject<boolean>(true);
-  }
+
+  constructor(private tools: ToolsService, private crud: CrudFirebaseService) { }
 
   ngOnInit() {
 
     this.subscription = this.crud.getAllAppointments().subscribe(
       (appointments) => {
         this.appointments = appointments;
-        this.load.setloader(false)
-        this.loady = this.load.loader
+        this.loader.next(false)
       },
       (error) => {
         console.error('Error fetching appointments: ', error);
-        this.load.setloader(false)
-        this.loady = this.load.loader
+        this.loader.next(false)
       }
 
 
     );
   }
 
-  valueLoading() {
-    console.log(this.loader)
-  }
 
   ngOnDestroy() {
     if (this.subscription) {

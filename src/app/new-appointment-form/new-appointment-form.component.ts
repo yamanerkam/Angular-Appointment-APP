@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -31,6 +32,8 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   styleUrl: './new-appointment-form.component.css'
 })
 export class NewAppointmentFormComponent {
+
+  errorDate = new BehaviorSubject<string>('');
   constructor(private crud: CrudFirebaseService, private tools: ToolsService) {
 
   }
@@ -46,14 +49,21 @@ export class NewAppointmentFormComponent {
   async handleForm(event: any) {
     console.log('working form')
     event.preventDefault()
-    this.crud.addAppointment(this.customername, this.title, new Date(this.date), new Date(this.time))
+    if (this.date && this.time) {
+      console.log('fired update')
+      this.crud.addAppointment(this.customername, this.title, new Date(this.date), new Date(this.time))
+      this.errorMessage = this.crud.errorMessage;
 
-    this.errorMessage = this.crud.errorMessage;
+      this.customername = '';
+      this.title = ''
+      this.date = ''
+      this.time = ''
+    } else {
+      console.log('update else')
+      this.errorDate.next('Please fill all the fields!');
+    }
 
-    this.customername = '';
-    this.title = ''
-    this.date = ''
-    this.time = ''
+
   }
 
   navigate(path: string) {
